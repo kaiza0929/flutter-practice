@@ -17,4 +17,8 @@ class Node {
     Node(this.keyword);
 
 }
+
+/* インスタンスの作成 */
+Node()
+
 ```
