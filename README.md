@@ -17,4 +17,14 @@ class Node {
     Node(this.keyword);
 
 }
+
+/* インスタンスの作成 */
+Node()
+```
+finalは再代入不可(つまり定数) constとは評価(?)のタイミングが異なる<br><br>
+非同期関数 FutureはJSのPromiseのようなもの<br>
+```
+Future<String> getText() async {
+  return "あああああ";
+}
 ```
