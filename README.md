@@ -20,7 +20,6 @@ class Node {
 
 /* インスタンスの作成 */
 Node()
-<<<<<<< HEAD
 ```
 finalは再代入不可(つまり定数) constとは評価(?)のタイミングが異なる<br><br>
 非同期関数 FutureはJSのPromiseのようなもの<br>
@@ -28,8 +27,3 @@ finalは再代入不可(つまり定数) constとは評価(?)のタイミング�
 Future<String> getText() async {
   return "あああああ";
 }
-```
-=======
-
-```
->>>>>>> c314f7cf0cac9f757d8ced8b07d143565c8f424f
