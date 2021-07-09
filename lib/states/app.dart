@@ -1,19 +1,16 @@
-import "./user.dart";
-import "./item.dart";
+import "./shipping.dart";
 
 class AppState {
 
-  UserState userState;
-  ItemState itemState;
-
-  AppState(this.userState, this.itemState);
+  ShippingState shippingState;
+  AppState(this.shippingState);
 
   static AppState initAppState() {
-    return new AppState(UserState.initUserState(), ItemState.initItemState());
+    return new AppState(ShippingState.initShippingState());
   }
 
 }
 
 AppState appReducer(AppState state, action) {
-  return AppState(userReducer(state.userState, action), itemReducer(state.itemState, action));
+  return AppState(shippingReducer(state.shippingState, action));
 }

@@ -9,7 +9,7 @@ class Header extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Text("Flutter App")
+      title: Text("メルカリ送料計算ツール")
     );
   }
 
