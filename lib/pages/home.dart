@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_redux/flutter_redux.dart";
 import "./../common/header.dart";
+import "./../common/footer.dart";
 import "./../states/app.dart";
 import "./../states/shipping.dart";
 import "./../services/calc.dart";
@@ -39,7 +40,7 @@ class HomePageState extends State<HomePage> {
   @override 
   Widget build(BuildContext context) {
 
-    return Scaffold(appBar: Header(), body: StoreConnector<AppState, ShippingState>(
+    return Scaffold(appBar: Header(), bottomNavigationBar: Footer(), body: StoreConnector<AppState, ShippingState>(
       converter: (store) => store.state.shippingState,
       builder: (context, state) {
         return Container(child: Column(children: [
