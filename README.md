@@ -28,12 +28,24 @@ finalは再代入不可(つまり定数) constとは評価(?)のタイミング�
 Future<String> getText() async {
   return "あああああ";
 }
-<<<<<<< HEAD
 ```
 
 ウィジェットのchildrenの中でfor文を使う場合は{}が不要<br>
 ```
 for (var value in ["NormalMail", "RMercari", "YMercari"]) Radio(value: value, groupValue: "shipping", onChanged: (e) => { print(e) }),
 ```
-=======
->>>>>>> refs/remotes/origin/main
+インターフェースは存在しない。抽象クラスならある。<br>
+```
+abstract class ShippingCalculator {
+  int calc(double longSide, double shortSide, double thickness, double weight);
+}
+
+class RMercariShippingCalculator  extends ShippingCalculator {
+
+  @override
+  int calc(double longSide, double shortSide, double thickness, double weight) {
+    return 0;
+  }
+
+}
+```

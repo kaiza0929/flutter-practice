@@ -15,7 +15,9 @@ class HomePageState extends State<HomePage> {
   double shortSide = 0.0;
   double thickness = 0.0;
   double weight = 0.0;
-  int shippingFee = -1;
+
+  /* ラジオの初期選択値 */
+  String selectedRadioValue = "普通郵便";
 
   final _formKey = GlobalKey<FormState>();
 
@@ -45,10 +47,7 @@ class HomePageState extends State<HomePage> {
             Padding(padding: EdgeInsets.only(bottom: 30), child: Row(children: [
               for (var value in ["普通郵便", "らくらくメルカリ便", "ゆうゆうメルカリ便"]) 
                 /* valueとgroupValueが一致するラジオボタンが選択済みになる */
-                Expanded(child: RadioListTile(title: Text(value), activeColor: Colors.blue, value: value, groupValue: state.shiiping.name, onChanged: (e) { 
-                  StoreProvider.of<AppState>(context).dispatch(SetShippingAction(e as String));
-                  CalculateService.setShippingCalculator(state.shiiping.name);
-                })),
+                Expanded(child: RadioListTile(title: Text(value), activeColor: Colors.blue, value: value, groupValue: selectedRadioValue, onChanged: (e) { setState(() { selectedRadioValue = e as String; }); })),
             ])),
             /* value as doubleだとエラー */
             Padding(padding: EdgeInsets.only(bottom: 30), child: TextFormField(decoration: InputDecoration(labelText: "長辺(cm)"), validator: (value) => checkNumberFormat(value), onSaved: (value) => { setState(() { longSide = double.parse(value as String); }) },)),
@@ -58,12 +57,16 @@ class HomePageState extends State<HomePage> {
             ElevatedButton(child: Text("送料を算出"), style: ElevatedButton.styleFrom(primary: Colors.orange, onPrimary: Colors.white), onPressed: () {
               if ((_formKey.currentState as FormState).validate()) {
                 (_formKey.currentState as FormState).save();
-                setState(() { shippingFee = CalculateService.calc(longSide, shortSide, thickness, weight); });
+                StoreProvider.of<AppState>(context).dispatch(SetShippingAction(callCalculateFunction(selectedRadioValue, longSide, shortSide, thickness, weight)));
               }
             }),
           ])),
-          Text(state.shiiping.name),
-          Text(shippingFee.toString())
+          if (state.shipping.fee != -1)
+            Column(children: [
+              Text(state.shipping.name),
+              Text(state.shipping.type),
+              Text(state.shipping.fee.toString())
+          ])
         ]));
       }
     ));
